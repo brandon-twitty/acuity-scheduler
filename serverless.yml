@@ -11,10 +11,18 @@ provider:
 
 plugins:
   - serverless-webpack
+  - serverless-offline
 #  - serverless-bundle
 package:
   individually: true
 functions:
+  getAppointments:
+    handler: app/getAppointments.handler
+    events:
+      - http:
+          path: get-appointments
+          method: GET
+          cors: true
   app:
     handler: app/app.handler
     events:
