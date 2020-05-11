@@ -1,3 +1,4 @@
+to deploy press sls deploy
 scheduling api to acuity currently pulls all appointments
 
 needs to add get available  times and dates 
