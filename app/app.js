@@ -29,6 +29,26 @@ app.get('/appointments', (req, res) => {
     })
 
 });
+app.get('/get-months', (req, res) => {
+    var acuity = Acuity.basic(config);
+    return acuity.request('get-months', function (err, res, response) {
+        //res.send({appointments});
+
+        console.log('twitty months JSON = ',JSON.stringify(response));
+        return done(response)
+    })
+
+});
+app.get('/get-times', (req, res) => {
+    var acuity = Acuity.basic(config);
+    return acuity.request('get-times', function (err, res, response) {
+        //res.send({appointments});
+
+        console.log('twitty times JSON = ',JSON.stringify(response));
+        return done(response)
+    })
+
+});
 const done = response => {
     return {
         statusCode: '200',
