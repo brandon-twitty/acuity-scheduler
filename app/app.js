@@ -2,7 +2,12 @@ var config = require('../config');
 const serverless = require('serverless-http');
 var Acuity = require('acuityscheduling');
 const express = require('express');
-const app = express();
+const app = express(),
+    cors = require('cors');
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cors());
 
 app.get('/', function (req, res){
     var acuity = Acuity.basic(config);
@@ -13,21 +18,16 @@ app.get('/', function (req, res){
     session.time = null;
     return res;
 });
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.get('/api/info', (req, res) => {
     res.send({ application: 'sample-app', version: '1.0' });
 });
 app.get('/appointments', (req, res) => {
     var acuity = Acuity.basic(config);
-    return acuity.request('appointments', function (err, res, response) {
-        //res.send({appointments});
-
+    return acuity.request('appointments', function (err, response) {
+        if(err) return err;
         console.log('twitty appointments JSON = ',JSON.stringify(response));
-        return done(response)
-    })
-
+        return res.send(response);
+    });
 });
 const done = response => {
     return {
