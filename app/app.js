@@ -29,6 +29,26 @@ app.get('/appointments', (req, res) => {
         return res.send(response);
     });
 });
+app.get('/get-dates', (req, res) => {
+    var acuity = Acuity.basic(config);
+    return acuity.request('/availability/dates?month=' + req.query.month + '&appointmentTypeID=' + req.query.appointmentTypeID + '&timezone=' + req.query.timezone, function (err, response, dates) {
+        if(err) return res.send(err);
+        return res.send({
+            status: 200,
+            dates: dates
+        });
+    });
+});
+app.get('/get-times', (req, res) => {
+    var acuity = Acuity.basic(config);
+    return acuity.request('/availability/times?date=' + req.query.date + '&appointmentTypeID=' + req.query.appointmentTypeID + '&timezone=' + req.query.timezone, function (err, response, times) {
+        if(err) return res.send(err);
+        return res.send({
+            status: 200,
+            times: times
+        });
+    });
+});
 const done = response => {
     return {
         statusCode: '200',
@@ -44,5 +64,5 @@ const done = response => {
 app.post('/api/v1/getback', (req, res) => {
     res.send({ ...req.body });
 });
-//app.listen(3000, () => console.log(`Listening on: 3000`));
+// app.listen(3000, () => console.log(`Listening on: 3000`));
 module.exports.handler = serverless(app);
