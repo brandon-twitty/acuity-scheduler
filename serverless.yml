@@ -3,7 +3,7 @@ frameworkVersion: ">=1.1.0 <2.0.0"
 provider:
   name: aws
   runtime: nodejs12.x
-  profile: default
+  profile: med-app
   stage: dev
   role: arn:aws:iam::933153212182:role/candidate-service-dev-sa-east-1-lambdaRole
   region: us-east-2

@@ -49,6 +49,28 @@ app.get('/get-times', (req, res) => {
         });
     });
 });
+
+app.post('/appointments', (req, res) => {
+    var options = {
+        method: 'POST',
+        body: {
+            appointmentTypeID: req.body.appointmentTypeID,
+            datetime: req.body.datetime,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email
+        }
+    };
+    console.log('request body ', options);
+    var acuity = Acuity.basic(config);
+    return acuity.request('/appointments',options, function (err, response, appointment) {
+        if(err) return res.send(err);
+        return res.send({
+            status: 200,
+            appointment: JSON.stringify(appointment, null, '')
+        });
+    });
+});
 const done = response => {
     return {
         statusCode: '200',
