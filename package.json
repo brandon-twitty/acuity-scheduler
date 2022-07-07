@@ -15,7 +15,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "ion2-calendar": "^3.0.0-rc.0",
-    "moment": "^2.26.0",
+    "moment": "^2.29.4",
     "serverless-http": "^2.3.2",
     "serverless-s3-sync": "^1.10.6",
     "serverless-webpack": "^5.3.1",
